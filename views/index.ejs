@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Attendance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f5f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        .login-container {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            color: #007bff;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .login-container .icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .login-container button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #9d2929;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        a{
+            color: white;
+            text-decoration: none;
+        }
+
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+         
+        #stu{
+            height: 65px;
+        }
+        /* Responsive Styling */
+        @media screen and (min-width: 768px) {
+            .login-container {
+                width: calc(50% - 20px);
+                margin-right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Smart Attendance</h1>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; margin-top: 30px;">
+
+        <!-- Teacher Login Card -->
+            <div class="login-container">
+                <span class="icon">👨‍🏫</span>
+                <h2>Teacher Login</h2>
+                <button ><a href="/login" target="_blank">Click Here</a></button>
+            </div>
+
+        <!-- Admin Login Card -->
+        <div class="login-container">
+            <span class="icon">👩‍💼</span>
+            <h2>Admin Login</h2>
+            <button ><a href="/login" target="_blank">Click Here</a></button>
+        </div>
+        <!-- Student -->
+        <div class="login-container">
+            <span class="icon"><img id="stu" src="https://cdn-icons-png.freepik.com/512/3429/3429191.png" ></span>
+            <h2>View Attendance</h2>
+            <button ><a href="/student_home" target="_blank">Click Here</a></button>
+        </div>
+    </div>
+</body>
+</html>

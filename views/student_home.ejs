@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Attendance</title>
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f5f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+            width: 400px;
+            /* margin: 0 auto; */
+            margin-top: 0;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group input[type="text"]
+        {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .form-group select,
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-group input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        table {
+        margin: 0 auto; /* Center the table horizontally */
+        border-collapse: collapse;
+        width: 80%; /* Adjust the width as needed */
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .submit-btn
+        {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: blue;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-btn:hover{
+            background-color: blueviolet;
+        }
+        header {
+            background-color: #3f51b5;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .logout-btn {
+            background-color: #f44336;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header style="display:flexbox">
+        <h1 style="color: white;">Enter details to view Attendance</h1>
+        <button class="logout-btn" onclick="location.href='index'">Logout</button>
+    </header>
+    <div class="form-container">
+        <form id="attendance-form">
+            <div class="form-group">
+                <label for="course">Course:</label>
+                <select name="course" id="course">
+                    <option value="B.Tech">B.Tech</option>
+                    <option value="M.Tech">M.Tech</option>
+                    <option value="MCA">MCA</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="passing-year">Passing Year:</label>
+                <select name="passing-year" id="passing-year">
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                    <option value="2025" selected>2025</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="branch">Branch:</label>
+                <select name="branch" id="branch">
+                    <option value="IT">IT</option>
+                    <option value="CS">CS</option>
+                    <option value="EE">EE</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Enrollment_No">Enter Your Enrollment_No: </label>
+                <input type="text" name="Enrollment_No" id="Enrollment_No">
+            </div>
+            <!-- <div class="submit-btn">
+                <input type="button" id="show-attendance" value="Show Attendance">
+            </div> -->
+            <button type="button" class="submit-btn" id="show-attendance">Show Attendance</button>
+        </form>
+    </div>
+
+    <div id="attendance-table"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const showAttendanceBtn = document.getElementById('show-attendance');
+            showAttendanceBtn.addEventListener('click', function () {
+                // Get form values
+                const course = document.getElementById('course').value;
+                const passingYear = document.getElementById('passing-year').value;
+                const branch = document.getElementById('branch').value;
+                const enrollmentNo = document.getElementById('Enrollment_No').value;
+    
+                // Make an AJAX request to fetch the percentage
+                fetch(`/fetchPercentage?enrollmentNo=${enrollmentNo}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // Create a new table
+                        const table = document.createElement('table');
+                        table.innerHTML = `
+                            <thead>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Passing Year</th>
+                                    <th>Branch</th>
+                                    <th>Enrollment No</th>
+                                    <th>Percentage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>${course}</td>
+                                    <td>${passingYear}</td>
+                                    <td>${branch}</td>
+                                    <td>${enrollmentNo}</td>
+                                    <td>${data.percentage}</td>
+                                </tr>
+                            </tbody>
+                        `;
+    
+                        // Clear previous table if exists
+                        const existingTable = document.getElementById('attendance-table');
+                        if (existingTable) {
+                            existingTable.innerHTML = '';
+                        }
+    
+                        // Append the new table
+                        document.getElementById('attendance-table').appendChild(table);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching percentage:', error);
+                    });
+            });
+        });
+    </script>
+    
+</body>
+</html>

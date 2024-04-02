@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    table, th, td {
+            align-items: center;
+            align-self: center;
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+        th {
+            text-align: left;
+        }
+        .present-button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            cursor: pointer;
+        }
+  </style>
+  <title>Take Attendance</title>
+</head>
+<body>
+  <header class="text-gray-600 body-font">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+      <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        </svg>
+        <span class="ml-3 text-xl">Attendance Tracker</span>
+      </a>
+      <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+        <a class="mr-5 hover:text-gray-900"></a>
+        <a class="mr-5 hover:text-gray-900"></a>
+        <a class="mr-5 hover:text-gray-900"></a>
+        <a class="mr-5 hover:text-gray-900"></a>
+      </nav>
+      <button style="background-color: aqua;" class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
+        <a href="home">Click here to go to home</a>
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+      </button>
+    </div>
+  </header>
+  <main class="flex-grow">
+    <form id="attendance-form" class="container mx-auto flex justify-center">
+      <table>
+        <thead>
+          <tr>
+            <th>Mark Absent</th>
+            <th>Name</th>
+            <th>Enrollment</th>
+            <th>Classes Attended</th>
+            <th>Total Classes</th>
+            <th>% Percentage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% teachers.forEach((student, index) => { %>
+            <tr id="student_<%= index %>">
+              <td><input type="checkbox" class="absent-checkbox" data-student-id="<%= student._id %>"></td>
+              <td><%= student.Name %></td>
+              <td><%= student.Enrollment %></td>
+              <td><span id="percentage_<%= index %>"><%= student.Percentage %></span></td>
+              <td><span id="total_<%= index %>"><%= student.total%></span></td>
+              <td><span id="Per_<%= index %>"><%= student.Per%></span></td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+      <button type="submit" style="background-color: #4CAF50; border: none; color: white; padding: 5px 10px; text-align: center; text-decoration: none; display: inline-block; font-size: 14px; cursor: pointer;">Submit</button>
+    </form>
+  </main>
+  <footer class="text-gray-600 body-font">
+    <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+      <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        </svg>
+        <span class="ml-3 text-xl">Attendance Tracker</span>
+      </a>
+      <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 
+        <a href="https://twitter.com/knyttneve" class="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">2024 Attendance Tracker. All rights reserved.</a>
+      </p>
+      
+    </div>
+  </footer>
+  <script src="js/script.js"></script>
+</body>
+</html>
